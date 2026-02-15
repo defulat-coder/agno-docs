@@ -34,7 +34,9 @@ The cookbook path maps to the docs path by:
 1. Strip `cookbook/` prefix
 2. Strip leading number prefixes from directory names: `00_quickstart` → `quickstart`, `02_agents` → `agents`, `14_advanced` → `advanced`
 3. Convert underscores to hyphens in directory names: `input_output` → `input-output`
-4. Convert underscores to hyphens in filenames (without `.py`): `agent_with_tools.py` → `agent-with-tools.mdx`
+4. Convert underscores to hyphens in filenames (without `.py`), preserving a leading underscore when present:
+   - `agent_with_tools.py` → `agent-with-tools.mdx`
+   - `_agents.py` → `_agents.mdx`
 5. Preserve nested directory structure
 
 Examples:
@@ -42,6 +44,8 @@ Examples:
 - `cookbook/02_agents/14_advanced/debug.py` → `docs/examples/agents/advanced/debug.mdx`
 - `cookbook/03_teams/modes/broadcast/basic.py` → `docs/examples/teams/modes/broadcast/basic.mdx`
 - `cookbook/90_models/openai/chat/tool_use.py` → `docs/examples/models/openai/chat/tool-use.mdx`
+- `cookbook/05_agent_os/advanced_demo/_agents.py` → `docs/examples/agent-os/advanced-demo/_agents.mdx`
+- `cookbook/05_agent_os/advanced_demo/_teams.py` → `docs/examples/agent-os/advanced-demo/_teams.mdx`
 - `cookbook/91_tools/yfinance_tools.py` → `docs/examples/tools/yfinance-tools.mdx`
 
 ### MDX Page Template

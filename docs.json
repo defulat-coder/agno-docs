@@ -3084,7 +3084,7 @@
             "pages": [
               "examples/overview",
               {
-                "group": "Quickstart",
+                "group": "Basics",
                 "pages": [
                   "examples/quickstart/overview",
                   "examples/quickstart/agent-with-tools",
@@ -5015,8 +5015,8 @@
                     "group": "Advanced Demo",
                     "pages": [
                       "examples/agent-os/advanced-demo/overview",
-                      "examples/agent-os/advanced-demo/-agents",
-                      "examples/agent-os/advanced-demo/-teams",
+                      "examples/agent-os/advanced-demo/agents",
+                      "examples/agent-os/advanced-demo/teams",
                       "examples/agent-os/advanced-demo/demo",
                       "examples/agent-os/advanced-demo/file-output",
                       "examples/agent-os/advanced-demo/mcp-demo",

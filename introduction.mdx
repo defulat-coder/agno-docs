@@ -16,7 +16,7 @@ It provides the complete stack for building, running and managing multi-agent sy
 |-------|--------------|
 | **SDK** | The primitives: agents, teams, workflows, memory, knowledge, guardrails, and governance. |
 | **Engine** | The agent loop: model calls, tool execution, context management, memory retrieval. |
-| **AgentOS** | The runtime for serving your agents as production software: streaming, authentication, request isolation, approval enforcement, and a [control plane](https://os.agno.com) to monitor and manage everything. |
+| **AgentOS** | The runtime: serve your agents as production software. Streaming, authentication, request isolation, approval enforcement, and a [control plane](https://os.agno.com) to monitor and manage everything. |
 
 ## Why Agno?
 
@@ -28,13 +28,12 @@ Agentic software operates under a different contract than traditional software.
 
 **A new trust model.** Traditional software is predictable. Same input, same output, every time. Agents aren't. You can't trust the output the way you trust a database query. So the system has to monitor itself. Agno runs guardrails and evaluations as part of the engine, not as a separate tool you bolt on.
 
-The previous generation of programming languages can't express the new contract of agentic software.
-
-Agno is built to do exactly that.
+Agno is built to natively express the new contract of agentic software.
 
 ## Quick Example
 
 An agent with MCP tools, persistent state, and a production-ready API:
+
 ```python
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
@@ -66,8 +65,8 @@ Run this and connect to [os.agno.com](https://os.agno.com) to chat with your age
   </video>
 </Frame>
 
-## Next Steps
+## Get Started
 
 - [Build your first agent](/first-agent)
 - [Build your first multi-agent system](/first-multi-agent-system)
-- [Explore examples](/examples)
+- [Explore examples](/examples/introduction)

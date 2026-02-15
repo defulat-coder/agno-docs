@@ -2,6 +2,7 @@
 title: "Running the scheduler inside AgentOS with automatic polling"
 description: "Run the scheduler inside AgentOS with automatic schedule discovery."
 ---
+This example demonstrates the primary DX for the scheduler: - Setting scheduler=True on AgentOS to enable cron polling - The poller starts automatically on app startup and stops on shutdown - Schedules are created via the REST API (POST /schedules) - The internal service token handles auth between scheduler and agent endpoints
 
 ```python
 """Running the scheduler inside AgentOS with automatic polling.

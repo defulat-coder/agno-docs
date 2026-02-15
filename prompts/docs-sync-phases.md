@@ -29,7 +29,8 @@ Use this to run the Cookbook → Docs sync once per week. It is split into execu
 3. Preserve nested directory structure and apply path remapping:
    - strip `cookbook/`
    - strip numeric prefixes (`00_`, `01_`, ...)
-   - directory and filename underscores → hyphens
+   - directory underscores → hyphens
+   - filename underscores → hyphens, preserving a leading underscore when present (e.g. `_agents.py`)
    - filename `.py` → `.mdx`
 4. For every cookbook file, determine target mdx path under `docs/examples/`.
 

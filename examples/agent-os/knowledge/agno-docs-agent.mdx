@@ -1,8 +1,7 @@
 ---
 title: "Agno Docs Agent"
 description: "Demonstrates agno docs agent."
----
-~~~python
+---~~~python
 """
 Agno Docs Agent
 ===============
@@ -60,7 +59,7 @@ instructions = dedent(
 
     3. **Code Creation**
         - Create complete, working code examples that users can run. For example:
-        ```python
+        ~~~python
         from agno.agent import Agent
         from agno.tools.websearch import WebSearchTools
 
@@ -68,7 +67,7 @@ instructions = dedent(
 
         # Perform a web search and capture the response
         response = agent.run("What's happening in France?")
-        ```
+~~~
         - You must remember to use agent.run() and NOT agent.print_response()
         - Remember to:
             * Build the complete agent implementation

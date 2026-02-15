@@ -137,7 +137,8 @@ For each `.py` file that deserves to become a page, create an MDX page at the co
 **Naming convention:**
 - Cookbook: `cookbook/02_agents/04_tools/tool_choice.py`
 - MDX: `docs/examples/agents/tools/tool-choice.mdx`
-- Rule: Strip number prefix from directory, convert underscores to hyphens
+- Rule: Strip number prefixes from directories, convert underscores to hyphens.
+  - Preserve a leading underscore in filenames (e.g., `_agents.py` → `_agents.mdx`) so special script names remain unambiguous.
 
 **Page template:**
 ```mdx
