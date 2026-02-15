@@ -1,61 +1,73 @@
 ---
 title: Introduction
 sidebarTitle: Introduction
-description: "Build multi-agent systems that learn."
+description: "The programming language for agentic software."
 keywords: [introduction, agno]
 mode: "wide"
 ---
 
 ## What is Agno?
 
-**A framework for building multi-agent systems that learn and improve with every interaction.**
+**Agno is the programming language for agentic software.**
 
-Most agents are stateless. They reason, respond, forget. Session history helps, but they're exactly as capable on day 1000 as they were on day 1.
+It provides the complete stack for building, running and managing multi-agent systems.
 
-Agno agents are different. They remember users across sessions, accumulate knowledge across conversations, and learn from decisions. Insights from one user benefit everyone. The system gets smarter over time.
+| Layer | What it does |
+|-------|--------------|
+| **SDK** | The primitives: agents, teams, workflows, memory, knowledge, guardrails, and governance. |
+| **Engine** | The agent loop: model calls, tool execution, context management, memory retrieval. |
+| **AgentOS** | The runtime for serving your agents as production software: streaming, authentication, request isolation, approval enforcement, and a [control plane](https://os.agno.com) to monitor and manage everything. |
 
-Everything runs in your cloud. Your data never leaves your environment.
+## Why Agno?
+
+Agentic software operates under a different contract than traditional software.
+
+**A new interaction model.** Traditional software accepts requests and returns responses. Agents stream reasoning, tool calls, and results in real time. An agent can start reasoning, retrieve new information from memory, and pivot entirely. It can pause mid-execution, wait for input or approval, and resume days later. Agents require a fundamentally different interaction model and Agno supports it natively.
+
+**A new governance model.** Traditional software executes instructions. There's nothing to decide, so there's nothing to govern. Agents make decisions, and not all decisions are equal. Some decisions can be made freely, some need user approval, and some need admin approval. Agno lets you express who decides what as part of the agent definition, with approval workflows, human-in-the-loop, and audit logs built in.
+
+**A new trust model.** Traditional software is predictable. Same input, same output, every time. Agents aren't. You can't trust the output the way you trust a database query. So the system has to monitor itself. Agno runs guardrails and evaluations as part of the engine, not as a separate tool you bolt on.
+
+The previous generation of programming languages can't express the new contract of agentic software.
+
+Agno is built to do exactly that.
 
 ## Quick Example
 
-```python {8}
+An agent with MCP tools, persistent state, and a production-ready API:
+```python
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.openai import OpenAIResponses
+from agno.models.anthropic import Claude
+from agno.os import AgentOS
+from agno.tools.mcp import MCPTools
 
 agent = Agent(
-    model=OpenAIResponses(id="gpt-5.2"),
-    db=SqliteDb(db_file="tmp/agents.db"),
-    learning=True,
+    name="Agno Agent",
+    model=Claude(id="claude-sonnet-4-5"),
+    db=SqliteDb(db_file="agno.db"),
+    tools=[MCPTools(url="https://docs.agno.com/mcp")],
+    add_history_to_context=True,
+    markdown=True,
 )
+
+agent_os = AgentOS(agents=[agent])
+app = agent_os.get_app()
+
+if __name__ == "__main__":
+    agent_os.serve(app="agno_agent:app", reload=True)
 ```
 
-One line. Now your agent remembers users, accumulates knowledge, and improves over time.
+Run this and connect to [os.agno.com](https://os.agno.com) to chat with your agent:
 
-## Production Stack
-
-Agno provides the complete infrastructure for building multi-agent systems that learn:
-
-| Component                                      | What it does                                                                                                |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **[Agno SDK](https://pypi.org/project/agno/)** | Open source framework to build agents and multi-agent teams with learning, tools, knowledge, and guardrails |
-| **[AgentOS](agent-os/introduction)**           | Enterprise grade runtime to run your Agno SDK based agents in production                                    |
-| **[AgentOS UI](https://os.agno.com)**          | Control plane to build, monitor, and manage your agentic system                                             |
+<Frame>
+  <video autoPlay muted loop controls playsInline style={{ borderRadius: "0.5rem", width: "100%", height: "auto" }}>
+    <source src="/videos/agno-agent-chat.mp4" type="video/mp4" />
+  </video>
+</Frame>
 
 ## Next Steps
 
-<CardGroup cols={3}>
-  <Card title="Your First Agent" icon="user-robot" href="/first-agent">
-    Build your first learning agent.
-  </Card>
-  <Card
-    title="First Multi-Agent System"
-    icon="code-branch"
-    href="/first-multi-agent-system"
-  >
-    Build your first multi-agent system.
-  </Card>
-  <Card title="Run in Production" icon="server" href="/production/overview">
-    Deploy your system to production.
-  </Card>
-</CardGroup>
+- [Build your first agent](/first-agent)
+- [Build your first multi-agent system](/first-multi-agent-system)
+- [Explore examples](/examples)
