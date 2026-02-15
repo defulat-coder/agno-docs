@@ -122,29 +122,23 @@ export const codeTabs = [
       <>
         <span style={{ color: "#ff4017" }}>from</span> agno.agent{" "}
         <span style={{ color: "#ff4017" }}>import</span> Agent{"\n"}
-        <span style={{ color: "#ff4017" }}>
-          from
-        </span> agno.models.anthropic{" "}
+        <span style={{ color: "#ff4017" }}>from</span> agno.models.anthropic{" "}
         <span style={{ color: "#ff4017" }}>import</span> Claude{"\n"}
-        <span style={{ color: "#ff4017" }}>
-          from
-        </span> agno.tools.hackernews{" "}
-        <span style={{ color: "#ff4017" }}>import</span> HackerNewsTools{"\n"}
+        <span style={{ color: "#ff4017" }}>from</span> agno.tools.coding{" "}
+        <span style={{ color: "#ff4017" }}>import</span> CodingTools{"\n"}
         {"\n"}
         agent = Agent({"\n"}
         {"    "}model=Claude(id=
         <span style={{ color: "#c3e88d" }}>"claude-sonnet-4-5"</span>),{"\n"}
-        {"    "}tools=[HackerNewsTools()],{"\n"}
+        {"    "}tools=[CodingTools()],{"\n"}
         {"    "}add_history_to_context=
         <span style={{ color: "#ff4017" }}>True</span>,{"\n"}
-        <span style={highlightStyle}>
-          {"    "}learning=<span style={{ color: "#ff4017" }}>True</span>,
-        </span>
-        {"    "}markdown=<span style={{ color: "#ff4017" }}>True</span>,{"\n"})
+        {"    "}markdown=<span style={{ color: "#ff4017" }}>True</span>,{"\n"}
+        ){"\n"}
         {"\n"}
         agent.print_response(
         <span style={{ color: "#c3e88d" }}>
-          "Write a report on trending startups."
+          "Build a todo app with tests."
         </span>
         , stream=<span style={{ color: "#ff4017" }}>True</span>)
       </>

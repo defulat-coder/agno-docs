@@ -494,6 +494,75 @@
                 ]
               },
               {
+                "group": "Memory",
+                "pages": [
+                  "memory/overview",
+                  {
+                    "group": "Working with Memories",
+                    "pages": [
+                      "memory/working-with-memories/overview",
+                      "memory/working-with-memories/memory-optimization",
+                      {
+                        "group": "Usage",
+                        "pages": [
+                          {
+                            "group": "Storage Usage",
+                            "pages": [
+                              "memory/working-with-memories/mongodb-memory",
+                              "memory/working-with-memories/postgres-memory",
+                              "memory/working-with-memories/sqlite-memory",
+                              "memory/working-with-memories/redis-memory"
+                            ]
+                          },
+                          {
+                            "group": "Memory Manager Usage",
+                            "pages": [
+                              "memory/working-with-memories/standalone-memory",
+                              "memory/working-with-memories/memory-creation",
+                              "memory/working-with-memories/custom-memory-instructions",
+                              "memory/working-with-memories/memory-search",
+                              "memory/working-with-memories/memory-optimization"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Agents with Memory",
+                    "pages": [
+                      "memory/agent/overview",
+                      {
+                        "group": "Usage",
+                        "pages": [
+                          "memory/agent/agent-with-memory",
+                          "memory/agent/agentic-memory",
+                          "memory/agent/agents-share-memory",
+                          "memory/agent/custom-memory-manager",
+                          "memory/agent/multi-user-multi-session-chat",
+                          "memory/agent/multi-user-multi-session-chat-concurrent",
+                          "memory/agent/share-memory-and-history-between-agents"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Teams with Memory",
+                    "pages": [
+                      "memory/team/overview",
+                      {
+                        "group": "Usage",
+                        "pages": [
+                          "memory/team/team-with-memory-manager",
+                          "memory/team/team-with-agentic-memory"
+                        ]
+                      }
+                    ]
+                  },
+                  "memory/best-practices"
+                ]
+              },
+              {
                 "group": "Knowledge",
                 "pages": [
                   "knowledge/overview",
@@ -2591,75 +2660,6 @@
                       }
                     ]
                   }
-                ]
-              },
-              {
-                "group": "Memory",
-                "pages": [
-                  "memory/overview",
-                  {
-                    "group": "Working with Memories",
-                    "pages": [
-                      "memory/working-with-memories/overview",
-                      "memory/working-with-memories/memory-optimization",
-                      {
-                        "group": "Usage",
-                        "pages": [
-                          {
-                            "group": "Storage Usage",
-                            "pages": [
-                              "memory/working-with-memories/mongodb-memory",
-                              "memory/working-with-memories/postgres-memory",
-                              "memory/working-with-memories/sqlite-memory",
-                              "memory/working-with-memories/redis-memory"
-                            ]
-                          },
-                          {
-                            "group": "Memory Manager Usage",
-                            "pages": [
-                              "memory/working-with-memories/standalone-memory",
-                              "memory/working-with-memories/memory-creation",
-                              "memory/working-with-memories/custom-memory-instructions",
-                              "memory/working-with-memories/memory-search",
-                              "memory/working-with-memories/memory-optimization"
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "group": "Agents with Memory",
-                    "pages": [
-                      "memory/agent/overview",
-                      {
-                        "group": "Usage",
-                        "pages": [
-                          "memory/agent/agent-with-memory",
-                          "memory/agent/agentic-memory",
-                          "memory/agent/agents-share-memory",
-                          "memory/agent/custom-memory-manager",
-                          "memory/agent/multi-user-multi-session-chat",
-                          "memory/agent/multi-user-multi-session-chat-concurrent",
-                          "memory/agent/share-memory-and-history-between-agents"
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "group": "Teams with Memory",
-                    "pages": [
-                      "memory/team/overview",
-                      {
-                        "group": "Usage",
-                        "pages": [
-                          "memory/team/team-with-memory-manager",
-                          "memory/team/team-with-agentic-memory"
-                        ]
-                      }
-                    ]
-                  },
-                  "memory/best-practices"
                 ]
               },
               {

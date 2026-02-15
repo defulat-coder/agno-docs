@@ -26,40 +26,50 @@ Agentic software operates under a different contract than traditional software.
 
 Agno is built to natively express the new contract of agentic software.
 
-## Quick Example
+## What You Can Build
 
-An agent with MCP tools, persistent state, and a production-ready API:
+This is **Gcode**: a coding agent that writes, reviews, and iterates on code. It remembers project conventions, learns from its mistakes, and gets sharper the more you use it.
 
 ```python
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.anthropic import Claude
-from agno.os import AgentOS
-from agno.tools.mcp import MCPTools
+from agno.learn import LearnedKnowledgeConfig, LearningMachine, LearningMode
+from agno.models.openai import OpenAIResponses
+from agno.tools.coding import CodingTools
+from agno.tools.reasoning import ReasoningTools
 
-agent = Agent(
-    name="Agno Agent",
-    model=Claude(id="claude-sonnet-4-5"),
+gcode = Agent(
+    name="Gcode",
+    model=OpenAIResponses(id="gpt-5.2"),
     db=SqliteDb(db_file="agno.db"),
-    tools=[MCPTools(url="https://docs.agno.com/mcp")],
+    instructions=instructions,
+
+    # Knowledge: searchable long-term memory the agent can query
+    knowledge=gcode_knowledge,
+    search_knowledge=True,
+
+    # Learning: the agent extracts and stores its own learnings over time
+    learning=LearningMachine(
+        knowledge=gcode_learnings,
+        learned_knowledge=LearnedKnowledgeConfig(mode=LearningMode.AGENTIC),
+    ),
+
+    # Tools: sandboxed file ops + chain-of-thought reasoning
+    tools=[CodingTools(base_dir=workspace, all=True), ReasoningTools()],
+
+    # Memory: learn user preferences
+    enable_agentic_memory=True,
+
+    # Context: add the last 10 runs to context
     add_history_to_context=True,
+    num_history_runs=10,
     markdown=True,
 )
-
-agent_os = AgentOS(agents=[agent])
-app = agent_os.get_app()
-
-if __name__ == "__main__":
-    agent_os.serve(app="agno_agent:app", reload=True)
 ```
 
-Run this and connect to [os.agno.com](https://os.agno.com) to chat with your agent:
+No external memory service. No vector DB to configure separately. Knowledge, learning, memory, and tools are part of the agent definition, because in Agno, they're primitives, not integrations.
 
-<Frame>
-  <video autoPlay muted loop controls playsInline style={{ borderRadius: "0.5rem", width: "100%", height: "auto" }}>
-    <source src="/videos/agno-agent-chat.mp4" type="video/mp4" />
-  </video>
-</Frame>
+[See the full example →](/deploy/gcode)
 
 ## Get Started
 

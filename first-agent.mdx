@@ -5,9 +5,7 @@ keywords: [agno, agent, quickstart, tutorial]
 mode: "wide"
 ---
 
-## Build your first Agent
-
-Let's build a minimal Agent that stores sessions in a Sqlite database, includes the last 3 runs in the context, connects to an MCP server for information about Agno, and is served as a FastAPI application.
+Let's build an agent that can answer questions about Agno, remembers previous conversations, and runs as a production API — all in about 20 lines.
 
 Save the following code as `agno_assist.py`:
 
@@ -21,21 +19,22 @@ from agno.tools.mcp import MCPTools
 agno_assist = Agent(
     name="Agno Assist",
     model=Claude(id="claude-sonnet-4-5"),
-    db=SqliteDb(db_file="agno.db"),
-    tools=[MCPTools(url="https://docs.agno.com/mcp")],
+    db=SqliteDb(db_file="agno.db"),                     # session storage
+    tools=[MCPTools(url="https://docs.agno.com/mcp")],  # Agno docs via MCP
     add_datetime_to_context=True,
-    add_history_to_context=True,
-    num_history_runs=3,
+    add_history_to_context=True,                         # include past runs
+    num_history_runs=3,                                  # last 3 conversations
     markdown=True,
 )
 
+# Serve via AgentOS → streaming, auth, session isolation, API endpoints
 agent_os = AgentOS(agents=[agno_assist])
 app = agent_os.get_app()
 ```
 
 <Check>
 
-In ~20 lines: an Agent with memory, state, and MCP tools, served via FastAPI with pre-built endpoints.
+That's it. This gives you streaming responses, per-user session isolation, and a full API — no extra configuration.
 
 </Check>
 
@@ -78,14 +77,14 @@ In ~20 lines: an Agent with memory, state, and MCP tools, served via FastAPI wit
     fastapi dev agno_assist.py
     ```
 
-    This starts your AgentOS at `http://localhost:8000`.
+    This starts your AgentOS at `http://localhost:8000`. View the auto-generated API docs at `http://localhost:8000/docs`. You can add your own routes, middleware, or any FastAPI feature on top.
 
   </Step>
 </Steps>
 
 ## Connect to the AgentOS UI
 
-The [AgentOS UI](https://os.agno.com) connects directly to your runtime, letting you monitor, manage, and test your system.
+The [AgentOS UI](https://os.agno.com) connects directly to your runtime, letting you monitor, manage, and test your agents.
 
 1. Open [os.agno.com](https://os.agno.com) and sign in.
 2. Click **"Add new OS"** in the top navigation.
@@ -111,10 +110,7 @@ Once connected, you'll see your OS with a live status indicator.
 
 ## Chat with your Agent
 
-Go to **Chat** in the sidebar and select your Agent.
-
-- Ask "What is Agno?" and the Agent will answer using the Agno MCP server.
-- Each Agent maintains its own history, tools, and instructions. Switching users won't mix context.
+Go to **Chat** in the sidebar, select your Agent, and ask "What is Agno?" — the agent will pull from the Agno docs MCP server to answer.
 
 <Frame>
   <video
@@ -131,18 +127,10 @@ Go to **Chat** in the sidebar and select your Agent.
 
 <Tip>
 
-Click **Sessions** in the sidebar to view your Agent's conversations. Data is stored in your local database.
-
-No third-party tracing required.
+Click **Sessions** in the sidebar to view your Agent's conversations. Data is stored in your local database — no third-party tracing required.
 
 </Tip>
 
-## Pre-built API endpoints
-
-The pre-built FastAPI app includes SSE-compatible endpoints with per-user and per-session isolation that you can build on. Add your own routes, middleware, or any FastAPI feature.
-
-View the API docs at `http://localhost:8000/docs`.
-
 ## Next
 
-- [Build your first multi-agent system](/first-multi-agent-system)
+- [Build your first multi-agent system →](/first-multi-agent-system)
