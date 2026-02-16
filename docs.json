@@ -3042,15 +3042,15 @@
                 ]
               },
               {
-                "group": "Scout",
-                "pages": [
-                  "deploy/templates/scout/overview"
-                ]
-              },
-              {
                 "group": "Gcode",
                 "pages": [
                   "deploy/templates/gcode/overview"
+                ]
+              },
+              {
+                "group": "Scout",
+                "pages": [
+                  "deploy/templates/scout/overview"
                 ]
               }
             ]
