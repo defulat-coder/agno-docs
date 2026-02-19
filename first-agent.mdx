@@ -5,7 +5,15 @@ keywords: [agno, agent, quickstart, tutorial]
 mode: "wide"
 ---
 
-Let's build an agent that can answer questions about Agno, remembers previous conversations, and runs as a production API — all in about 20 lines.
+In this guide, you'll build an agent that:
+
+- Connects to an MCP server
+- Stores and retrieves past conversations
+- Runs as a production API
+
+All in about 20 lines of code.
+
+## 1. Define the Agent
 
 Save the following code as `agno_assist.py`:
 
@@ -28,17 +36,24 @@ agno_assist = Agent(
 )
 
 # Serve via AgentOS → streaming, auth, session isolation, API endpoints
-agent_os = AgentOS(agents=[agno_assist])
+agent_os = AgentOS(agents=[agno_assist], tracing=True)
 app = agent_os.get_app()
 ```
 
 <Check>
 
-That's it. This gives you streaming responses, per-user session isolation, and a full API — no extra configuration.
+You now have:
+  - A stateful agent
+  - Streaming responses
+  - Per-user session isolation
+  - A production-ready API
+  - Tracing enabled out of the box
+
+No 3rd-party services required
 
 </Check>
 
-## Run your AgentOS
+## 2. Run Your AgentOS
 
 <Steps>
   <Step title="Set up your virtual environment">
@@ -76,15 +91,24 @@ That's it. This gives you streaming responses, per-user session isolation, and a
     ```bash
     fastapi dev agno_assist.py
     ```
+    Your AgentOS is now running at:
 
-    This starts your AgentOS at `http://localhost:8000`. View the auto-generated API docs at `http://localhost:8000/docs`. You can add your own routes, middleware, or any FastAPI feature on top.
+    `http://localhost:8000`
+
+    API documentation is automatically available at:
+
+    `http://localhost:8000/docs`
 
   </Step>
 </Steps>
 
-## Connect to the AgentOS UI
+You can add your own routes, middleware, or any FastAPI feature on top.
 
-The [AgentOS UI](https://os.agno.com) connects directly to your runtime, letting you monitor, manage, and test your agents.
+## 3. Connect to the AgentOS UI
+
+The [AgentOS UI](https://os.agno.com) connects directly from your browser to your runtime.
+
+It lets you test, monitor, and manage your agents in real time.
 
 1. Open [os.agno.com](https://os.agno.com) and sign in.
 2. Click **"Add new OS"** in the top navigation.
@@ -106,11 +130,15 @@ The [AgentOS UI](https://os.agno.com) connects directly to your runtime, letting
   </video>
 </Frame>
 
-Once connected, you'll see your OS with a live status indicator.
+You’ll see your OS with a live status indicator once connected.
 
 ## Chat with your Agent
 
-Go to **Chat** in the sidebar, select your Agent, and ask "What is Agno?" — the agent will pull from the Agno docs MCP server to answer.
+Open Chat, select your agent, and ask:
+
+> What is Agno?
+
+The agent retrieves context from the Agno MCP server and responds with grounded answers.
 
 <Frame>
   <video
@@ -127,9 +155,22 @@ Go to **Chat** in the sidebar, select your Agent, and ask "What is Agno?" — th
 
 <Tip>
 
-Click **Sessions** in the sidebar to view your Agent's conversations. Data is stored in your local database — no third-party tracing required.
+Click Sessions in the sidebar to inspect stored conversations.
+
+All session data is stored in your local database. No third-party tracing or hosted memory service is required.
 
 </Tip>
+
+## What You Just Built
+
+In 20 lines, you built:
+- A stateful agent
+- Tool-augmented retrieval via MCP
+- A streaming API
+- Session isolation
+- A production-ready runtime
+
+This is the same architecture used for multi-agent systems in production.
 
 ## Next
 
