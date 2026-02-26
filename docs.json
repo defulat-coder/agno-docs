@@ -1136,6 +1136,7 @@
                   "hitl/user-input",
                   "hitl/dynamic-user-input",
                   "hitl/external-execution",
+                  "hitl/approval",
                   {
                     "group": "Usage",
                     "pages": [
