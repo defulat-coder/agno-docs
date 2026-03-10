@@ -41,7 +41,7 @@ Your metrics will still show the actual tokens used, including the removed tool 
 |------|---------|------------------|---------------------|
 | `store_media` | `True` | Images, videos, audio, files uploaded by users | Media not persisted to database |
 | `store_tool_messages` | `True` | Tool calls and their results (also removes corresponding assistant messages) | Tool execution details not stored, saves significant space |
-| `store_history_messages` | `True` | Historical messages from previous runs | Old history not stored, only current run persisted |
+| `store_history_messages` | `False` | Historical messages from previous runs | Old history not stored, only current run persisted |
 
 
 ## Disable Media Storage
@@ -122,9 +122,11 @@ team = Team(
 - When auditing tool behavior later, re-run the tool or log its output somewhere else before the run completes
 - Pair this with `store_media=False` when tools return binary payloads you don't need in the session record
 
-## Disable History Storage
+## History Storage
 
-`store_history_messages=False` keeps the runtime behavior (history still reaches the LLM) but scrubs the historic messages before persistence. Only the non-history messages are written to the database.
+`store_history_messages` defaults to `False` to prevent database bloat. History still reaches the LLM during runs (via `add_history_to_context`), but historic messages are scrubbed before persistence. Only the current run's messages are written to the database.
+
+Set `store_history_messages=True` if you need to persist complete conversation history.
 
 <CodeGroup>
 ```python Agent
@@ -137,7 +139,7 @@ agent = Agent(
     db=SqliteDb(db_file="tmp/agent.db"),
     add_history_to_context=True,
     num_history_runs=3,
-    store_history_messages=False,
+    store_history_messages=True,
 )
 ```
 
@@ -151,16 +153,16 @@ team = Team(
     db=SqliteDb(db_file="tmp/team.db"),
     add_history_to_context=True,
     num_history_runs=3,
-    store_history_messages=False,
+    store_history_messages=True,
 )
 ```
 </CodeGroup>
 
-### When to Toggle It
+### When to Enable It
 
-- **Cost / storage**: Reduce table size for high-volume deployments
-- **Privacy**: Avoid storing long-lived transcripts that contain sensitive data
-- **Debugging current runs only**: Keep just the latest interaction record
+- You need to inspect past conversations in the database
+- You're debugging multi-run interactions
+- Your agent relies heavily on historical context across sessions
 
 ## Combining Storage Flags
 
